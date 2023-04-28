@@ -1,5 +1,6 @@
 package me.yanjobs.pitutils.utils;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -8,16 +9,24 @@ import java.nio.file.Paths;
 import java.util.Properties;
 
 public class Config {
-    String defaultConfig = "answerQuickMaths=false";
+    static String defaultConfig = "quickmaths.enabled=false\nquickmaths.delayRange=1000,3000";
 
-    Path configPath = Paths.get(System.getProperty("user.home") + "lunarclient" + "config-pit-utils.properties");
-    public void createConfigFile() throws IOException {
+    static String lunarClientFolder() {
+        if (System.getProperty("os.version").contains("Windows")) {
+            return "\\.lunarclient\\";
+        } else {
+            return "/.lunarclient/";
+        }
+    }
+
+    static Path configPath = new File(System.getProperty("user.home") + lunarClientFolder() + "config-pit-utils.properties").toPath();
+    static public void createConfigFile() throws IOException {
         if (Files.notExists(configPath)) {
             Files.createFile(configPath);
             Files.write(configPath, defaultConfig.getBytes());
         }
     }
-    public Properties config() throws IOException {
+    public static Properties getConfig() throws IOException {
         createConfigFile();
         FileInputStream configInput = new FileInputStream(configPath.toFile());
         Properties config = new Properties();
