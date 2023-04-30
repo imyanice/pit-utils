@@ -20,7 +20,7 @@ public class AddChatMessage {
     }
     public static void addVerboseMessage(@NotNull String message) throws IOException {
         if (Objects.equals(Config.getConfig().getProperty("verbose"), "true")) {
-            ChatComponentText verboseLevel = new ChatComponentText(EnumChatFormatting.BLACK + "[" + EnumChatFormatting.DARK_BLUE + "PIT UTILS" + EnumChatFormatting.BLACK + "]" + EnumChatFormatting.YELLOW + " - ");
+            ChatComponentText verboseLevel = new ChatComponentText(EnumChatFormatting.BLACK + "[" + EnumChatFormatting.DARK_BLUE + "PIT UTILS" + EnumChatFormatting.BLACK + "]" + EnumChatFormatting.DARK_GRAY + " - ");
             Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(verboseLevel.text + message));
         }
        }
