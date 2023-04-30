@@ -3,11 +3,14 @@ package me.yanjobs.pitutils.events;
 import club.maxstats.weave.loader.api.event.ChatReceivedEvent;
 import club.maxstats.weave.loader.api.event.SubscribeEvent;
 
+import java.io.IOException;
+import java.util.Objects;
 import java.util.Timer;
 
 import java.util.TimerTask;
 import java.util.concurrent.ThreadLocalRandom;
 
+import me.yanjobs.pitutils.utils.Config;
 import net.minecraft.client.Minecraft;
 public class ChatEvent {
     public static double eval(final String str) {
@@ -121,31 +124,40 @@ public class ChatEvent {
      * @return the equation's result parsed from the message param
      */
     public String result (String message) {
-        String expression = message.substring(message.lastIndexOf("&e") +2 , message.lastIndexOf("&r"));
+        String expression = message.substring(message.indexOf(":")+2);
         expression = expression.replace("x", "*");
         return String.valueOf((int) (eval(expression)));
     }
+
+    public static double minRange() throws IOException {
+        String[] range = Config.getConfig().getProperty("quickmaths.range").split(",");
+        return Integer.parseInt(range[0]);
+    };
+    public static double maxRange() throws IOException {
+        String[] range = Config.getConfig().getProperty("quickmaths.range").split(",");
+        return Integer.parseInt(range[1]);
+    };
+
     @SubscribeEvent
-    public void onChatReceived(ChatReceivedEvent event) {
-        String quickMathMessage = event.getMessage().getUnformattedText();
+    public void onChatReceived(ChatReceivedEvent event) throws IOException {
+        if (Objects.equals(Config.getConfig().getProperty("quickmaths.enabled"), "true")) {
+            String quickMathMessage = event.getMessage().getUnformattedText();
 
-        System.out.println(quickMathMessage); // For debug purposes
+            if (quickMathMessage.contains("QUICK MATHS! Solve: ")) {
+                String result = result(quickMathMessage);
 
-        if (quickMathMessage.contains("&r&d&lQUICK MATHS! &r&7Solve: &r&e")) {
-            String result = result(quickMathMessage);
-
-            // Creating a new task
-            TimerTask task = new TimerTask() {
-                @Override
-                public void run() {
-                    Minecraft.getMinecraft().thePlayer.sendChatMessage(result);
-                }
-            };
-            Timer timer = new Timer("Timer");
-            long delay = (long) simpleRandom(1000, 3000);
-            // Timing the task with the delay created above
-            timer.schedule(task, delay);
+                // Creating a new task
+                TimerTask task = new TimerTask() {
+                    @Override
+                    public void run() {
+                        Minecraft.getMinecraft().thePlayer.sendChatMessage(result);
+                    }
+                };
+                Timer timer = new Timer("Timer");
+                long delay = (long) simpleRandom(minRange(), maxRange());
+                // Timing the task with the delay created above
+                timer.schedule(task, delay);
+            }
         }
     }
-
 }
