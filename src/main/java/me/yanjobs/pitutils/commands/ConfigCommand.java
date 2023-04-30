@@ -2,20 +2,14 @@ package me.yanjobs.pitutils.commands;
 
 import club.maxstats.weave.loader.api.command.Command;
 
-import club.maxstats.weave.loader.api.event.EntityListEvent;
 import me.yanjobs.pitutils.utils.AddChatMessage;
 import me.yanjobs.pitutils.utils.Config;
-import me.yanjobs.pitutils.utils.Config.*;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.util.ChatComponentText;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import java.io.IOException;
 import java.util.Objects;
-import java.util.Set;
 
 public class ConfigCommand extends Command {
 
