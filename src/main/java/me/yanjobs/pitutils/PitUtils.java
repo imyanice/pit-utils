@@ -3,7 +3,7 @@ package me.yanjobs.pitutils;
 import club.maxstats.weave.loader.api.ModInitializer;
 import club.maxstats.weave.loader.api.command.CommandBus;
 import club.maxstats.weave.loader.api.event.EventBus;
-import me.yanjobs.pitutils.commands.HelloCommand;
+import me.yanjobs.pitutils.commands.ConfigCommand;
 import me.yanjobs.pitutils.events.ChatEvent;
 import me.yanjobs.pitutils.utils.Config;
 
@@ -14,7 +14,7 @@ public class PitUtils implements ModInitializer {
     public void init() {
         System.out.println("Starting hook... | PitQuickMaths");
         EventBus.subscribe(new ChatEvent());
-        CommandBus.register(new HelloCommand());
+        CommandBus.register(new ConfigCommand());
         try {
             Config.createConfigFile();
         } catch (IOException e) {

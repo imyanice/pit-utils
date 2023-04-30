@@ -9,7 +9,7 @@ import java.nio.file.Paths;
 import java.util.Properties;
 
 public class Config {
-    static String defaultConfig = "quickmaths.enabled=false\nquickmaths.delayRange=1000,3000";
+    static String defaultConfig = "quickmaths.enabled=false\nquickmaths.delayRange=1000,3000\nverbose=false";
 
     static String lunarClientFolder() {
         if (System.getProperty("os.version").contains("Windows")) {
