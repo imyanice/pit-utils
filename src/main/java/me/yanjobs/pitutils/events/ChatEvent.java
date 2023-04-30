@@ -10,6 +10,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ThreadLocalRandom;
 
+import me.yanjobs.pitutils.utils.AddChatMessage;
 import me.yanjobs.pitutils.utils.Config;
 import net.minecraft.client.Minecraft;
 public class ChatEvent {
@@ -151,6 +152,11 @@ public class ChatEvent {
                     @Override
                     public void run() {
                         Minecraft.getMinecraft().thePlayer.sendChatMessage(result);
+                        try {
+                            AddChatMessage.addVerboseMessage("Successfully answered Quick Maths.");
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
                     }
                 };
                 Timer timer = new Timer("Timer");
