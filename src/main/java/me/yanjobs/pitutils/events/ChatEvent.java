@@ -127,7 +127,7 @@ public class ChatEvent {
     public String result (String message) {
         String expression = message.substring(message.indexOf(":")+2);
         expression = expression.replace("x", "*");
-        return String.valueOf((int) (eval(expression)));
+        return "/ac" + (int) (eval(expression));
     }
 
     public static double minRange() throws IOException {
