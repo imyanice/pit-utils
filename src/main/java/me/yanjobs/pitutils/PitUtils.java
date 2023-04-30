@@ -10,15 +10,21 @@ import me.yanjobs.pitutils.utils.Config;
 import java.io.IOException;
 
 public class PitUtils implements ModInitializer {
+    private static Config config;
     @Override
     public void init() {
         System.out.println("Starting hook... | PitQuickMaths");
         EventBus.subscribe(new ChatEvent());
         CommandBus.register(new ConfigCommand());
         try {
-            Config.createConfigFile();
+            config = new Config();
+            config.createConfigFile();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static Config getConfig() {
+        return config;
     }
 }

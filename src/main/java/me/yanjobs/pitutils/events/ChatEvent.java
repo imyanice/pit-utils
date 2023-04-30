@@ -10,8 +10,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ThreadLocalRandom;
 
+import me.yanjobs.pitutils.PitUtils;
 import me.yanjobs.pitutils.utils.AddChatMessage;
-import me.yanjobs.pitutils.utils.Config;
 import net.minecraft.client.Minecraft;
 public class ChatEvent {
     public static double eval(final String str) {
@@ -131,17 +131,17 @@ public class ChatEvent {
     }
 
     public static double minRange() throws IOException {
-        String[] range = Config.getConfig().getProperty("quickmaths.range").split(",");
+        String[] range = PitUtils.getConfig().getProperties().getProperty("quickmaths.range").split(",");
         return Integer.parseInt(range[0]);
     };
     public static double maxRange() throws IOException {
-        String[] range = Config.getConfig().getProperty("quickmaths.range").split(",");
+        String[] range = PitUtils.getConfig().getProperties().getProperty("quickmaths.range").split(",");
         return Integer.parseInt(range[1]);
     };
 
     @SubscribeEvent
     public void onChatReceived(ChatReceivedEvent event) throws IOException {
-        if (Objects.equals(Config.getConfig().getProperty("quickmaths.enabled"), "true")) {
+        if (Objects.equals(PitUtils.getConfig().getProperties().getProperty("quickmaths.enabled"), "true")) {
             String quickMathMessage = event.getMessage().getUnformattedText();
 
             if (quickMathMessage.contains("QUICK MATHS! Solve: ")) {
