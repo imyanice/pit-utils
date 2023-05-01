@@ -8,7 +8,6 @@ import me.yanjobs.pitutils.PitUtils;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import java.io.IOException;
 import java.util.Objects;
 
 public class ConfigCommand extends Command {
@@ -20,7 +19,7 @@ public class ConfigCommand extends Command {
         boolean isMatch = matcher.matches();
         if (isMatch) {
             String[] numbers = message.split(",");
-            return Integer.parseInt(numbers[0]) < Integer.parseInt(numbers[2]);
+            return Integer.parseInt(numbers[0]) < Integer.parseInt(numbers[1]);
         } else {
             return false;
         }
