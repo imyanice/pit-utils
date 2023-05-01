@@ -8,7 +8,7 @@ import java.nio.file.Path;
 import java.util.Properties;
 
 public class Config {
-    public String defaultConfig = "quickmaths.enabled=false\nquickmaths.delayRange=1000,3000\nverbose=false";
+    public String defaultConfig = "quickmaths.enabled=false\nquickmaths.delayRange=1000,3000\nverbose=false\nglint.enabled=false";
 
     public String getLunarClientFolder() {
         if (System.getProperty("os.version").contains("Windows")) {
@@ -33,6 +33,15 @@ public class Config {
         return config;
     }
 
+    public String getProperty(String key) throws IOException {
+        try (FileInputStream configInput = new FileInputStream(configPath.toFile())) {
+            Properties prop = new Properties();
+            prop.load(configInput);
+            configInput.close();
+            return prop.getProperty(key);
+        }
+    }
+
     public void setProperty(@NotNull String key, @NotNull String value) {
         try (FileInputStream configInput = new FileInputStream(configPath.toFile())) {
             Properties prop = new Properties();
@@ -40,6 +49,8 @@ public class Config {
             prop.setProperty(key, value);
             try (OutputStream output = new FileOutputStream(configPath.toFile())) {
                 prop.store(output, null);
+                configInput.close();
+                output.close();
             }
         } catch (IOException io) {
             io.printStackTrace();
