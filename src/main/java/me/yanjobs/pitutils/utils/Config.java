@@ -34,13 +34,16 @@ public class Config {
     }
 
     public void setProperty(@NotNull String key, @NotNull String value) {
-        try {
-            FileOutputStream out = new FileOutputStream(configPath.toFile());
-            getProperties().setProperty(key, value);
-            getProperties().store(out, null);
-        } catch (IOException e) {
-            AddChatMessage.addErrorMessage("An error happened while editing the config. Check the logs for more infos.");
-            throw new RuntimeException(e);
+        try (FileInputStream configInput = new FileInputStream(configPath.toFile())) {
+            Properties prop = new Properties();
+            prop.load(configInput);
+            prop.setProperty(key, value);
+            try (OutputStream output = new FileOutputStream(configPath.toFile())) {
+                prop.store(output, null);
+            }
+        } catch (IOException io) {
+            io.printStackTrace();
         }
     }
+
 }
