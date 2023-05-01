@@ -94,7 +94,7 @@ public class KSGlint {
         return (networkPlayerInfoIn.getDisplayName() != null) ? networkPlayerInfoIn.getDisplayName().getFormattedText() : ScorePlayerTeam.formatPlayerName(networkPlayerInfoIn.getPlayerTeam(), networkPlayerInfoIn.getGameProfile().getName());
     }
     @SubscribeEvent
-            public void renderPlayers(final RenderWorldEvent event) throws IOException {
+    public void renderPlayers(final RenderWorldEvent event) throws IOException {
         if (Objects.equals(PitUtils.getConfig().getProperty("glint.enabled"), "true")) {
             final List<String> players = getOnlinePlayersByName();
             for (String s : players) {
