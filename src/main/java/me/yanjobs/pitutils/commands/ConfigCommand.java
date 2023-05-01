@@ -23,7 +23,7 @@ public class ConfigCommand extends Command {
         } else {
             return false;
         }
-    };
+    }
 
     public ConfigCommand() {
         super("pitconfig", "pconfig", "pconf", "pitc");
@@ -51,6 +51,14 @@ public class ConfigCommand extends Command {
                 if (args[1].equalsIgnoreCase("true") || args[1].equalsIgnoreCase("false")) {
                     PitUtils.getConfig().setProperty("verbose", args[1].toLowerCase());
                     AddChatMessage.addInfoMessage("Successfully set verbose to " + args[1].toLowerCase());
+                } else {
+                    AddChatMessage.addErrorMessage("The value must be either 'true' or 'false'");
+                }
+            }
+            else if (Objects.equals(args[0], "glint.enabled")) {
+                if (args[1].equalsIgnoreCase("true") || args[1].equalsIgnoreCase("false")) {
+                    PitUtils.getConfig().setProperty("glint.enabled", args[1].toLowerCase());
+                    AddChatMessage.addInfoMessage("Successfully set glint.enabled to " + args[1].toLowerCase());
                 } else {
                     AddChatMessage.addErrorMessage("The value must be either 'true' or 'false'");
                 }
