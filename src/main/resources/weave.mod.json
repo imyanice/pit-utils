@@ -1,5 +1,8 @@
 {
   "entrypoints": [
     "me.yanjobs.pitutils.PitUtils"
+  ],
+  "mixinConfigs": [
+    "pitutils.mixins.json"
   ]
 }
