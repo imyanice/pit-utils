@@ -8,7 +8,7 @@ import java.nio.file.Path;
 import java.util.Properties;
 
 public class Config {
-    public String defaultConfig = "quickmaths.enabled=false\nquickmaths.delayRange=1000,3000\nverbose=false\nglint.enabled=false";
+    public String defaultConfig = "quickmaths.enabled=false\nquickmaths.delayRange=1000,3000\nverbose=false\nglint.enabled=false\ntarget.enabled=false\ntarget.players=";
 
     public String getLunarClientFolder() {
         if (System.getProperty("os.version").contains("Windows")) {

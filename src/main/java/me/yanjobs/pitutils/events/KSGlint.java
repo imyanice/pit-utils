@@ -93,8 +93,29 @@ public class KSGlint {
     public static String getPlayerName(final NetworkPlayerInfo networkPlayerInfoIn) {
         return (networkPlayerInfoIn.getDisplayName() != null) ? networkPlayerInfoIn.getDisplayName().getFormattedText() : ScorePlayerTeam.formatPlayerName(networkPlayerInfoIn.getPlayerTeam(), networkPlayerInfoIn.getGameProfile().getName());
     }
+
+
     @SubscribeEvent
     public void renderPlayers(final RenderWorldEvent event) throws IOException {
+        if (Objects.equals(PitUtils.getConfig().getProperty("target.enabled"), "true")) {
+            if (!Objects.equals(PitUtils.getConfig().getProperty("target.players"), "")){
+                String targetedPlayers = PitUtils.getConfig().getProperty("target.players");
+                for (NetworkPlayerInfo p : Minecraft.getMinecraft().getNetHandler().getPlayerInfoMap()) {
+                    if (targetedPlayers.contains(p.getGameProfile().getName())) {
+                        final Color color = new Color(255,255,255);
+                        final EntityPlayer player = Minecraft.getMinecraft().theWorld.getPlayerEntityByName(p.getGameProfile().getName());
+                        if (player != null) {
+                            GlStateManager.disableDepth();
+                            renderFilledHitbox(player, color, false, event.getPartialTicks());
+                            GlStateManager.enableDepth();
+                            AddChatMessage.addVerboseMessage("Glinted targeted player: " + player.getName());
+                        } else {
+                            System.out.println("What happened?! Player is null");
+                        }
+                    }
+                }
+            }
+        }
         if (Objects.equals(PitUtils.getConfig().getProperty("glint.enabled"), "true")) {
             final List<String> players = getOnlinePlayersByName();
             for (String s : players) {
