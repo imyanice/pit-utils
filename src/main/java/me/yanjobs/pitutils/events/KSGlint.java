@@ -97,13 +97,12 @@ public class KSGlint {
 
     @SubscribeEvent
     public void renderPlayers(final RenderWorldEvent event) throws IOException {
-        //Target
         if (Objects.equals(PitUtils.getConfig().getProperty("target.enabled"), "true")) {
             if (!Objects.equals(PitUtils.getConfig().getProperty("target.players"), "")){
                 String targetedPlayers = PitUtils.getConfig().getProperty("target.players");
                 for (NetworkPlayerInfo p : Minecraft.getMinecraft().getNetHandler().getPlayerInfoMap()) {
                     if (targetedPlayers.contains(p.getGameProfile().getName())) {
-                        final Color color = new Color(255,255,255, 85);
+                        final Color color = new Color(255,255,255);
                         final EntityPlayer player = Minecraft.getMinecraft().theWorld.getPlayerEntityByName(p.getGameProfile().getName());
                         if (player != null) {
                             GlStateManager.disableDepth();
@@ -117,7 +116,6 @@ public class KSGlint {
                 }
             }
         }
-        // MegaStreaks
         if (Objects.equals(PitUtils.getConfig().getProperty("glint.enabled"), "true")) {
             final List<String> players = getOnlinePlayersByName();
             for (String s : players) {
@@ -140,25 +138,25 @@ public class KSGlint {
 
     public Color getColorBasedOnStreak(final String playerName) {
         if (playerName.endsWith(" HELD")) {
-            return new Color(255, 255, 255, 85);
+            return new Color(255, 255, 80);
         }
         if (playerName.startsWith("OVRDRV ")) {
-            return new Color(255, 80, 80, 85);
+            return new Color(255, 80, 80);
         }
         if ((playerName.startsWith("BEAST ") || playerName.endsWith(" BEAST"))) {
-            return new Color(80, 255, 80, 85);
+            return new Color(80, 255, 80);
         }
         if (playerName.startsWith("HIGH ")) {
-            return new Color(255, 180, 0, 85);
+            return new Color(255, 180, 0);
         }
         if (playerName.startsWith("HERMIT ")) {
-            return new Color(80, 80, 255, 85);
+            return new Color(80, 80, 255);
         }
         if (playerName.startsWith("MOON ")) {
-            return new Color(80, 255, 255, 85);
+            return new Color(80, 255, 255);
         }
         if (playerName.startsWith("UBER")) {
-            return new Color(255, 80, 255, 85);
+            return new Color(255, 80, 255);
         }
         return null;
     }

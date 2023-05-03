@@ -1,7 +1,0 @@
-{
-  "compatibilityLevel": "JAVA_8",
-  "package": "me.yanjobs.pitutils.mixin",
-  "mixins": [
-    "RendererLivingEntityMixin"
-  ]
-}
