@@ -138,25 +138,25 @@ public class KSGlint {
 
     public Color getColorBasedOnStreak(final String playerName) {
         if (playerName.endsWith(" HELD")) {
-            return new Color(255, 255, 80);
+            return new Color(255, 255, 80, 100);
         }
         if (playerName.startsWith("OVRDRV ")) {
-            return new Color(255, 80, 80);
+            return new Color(255, 80, 80, 100);
         }
         if ((playerName.startsWith("BEAST ") || playerName.endsWith(" BEAST"))) {
-            return new Color(80, 255, 80);
+            return new Color(80, 255, 80, 100);
         }
         if (playerName.startsWith("HIGH ")) {
-            return new Color(255, 180, 0);
+            return new Color(255, 180, 0, 100);
         }
         if (playerName.startsWith("HERMIT ")) {
-            return new Color(80, 80, 255);
+            return new Color(80, 80, 255, 100);
         }
         if (playerName.startsWith("MOON ")) {
-            return new Color(80, 255, 255);
+            return new Color(80, 255, 255, 100);
         }
         if (playerName.startsWith("UBER")) {
-            return new Color(255, 80, 255);
+            return new Color(255, 80, 255, 100);
         }
         return null;
     }
