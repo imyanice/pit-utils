@@ -2,17 +2,15 @@ package me.yanjobs.pitutils.events;
 
 import club.maxstats.weave.loader.api.event.ChatReceivedEvent;
 import club.maxstats.weave.loader.api.event.SubscribeEvent;
+import me.yanjobs.pitutils.PitUtils;
+import me.yanjobs.pitutils.utils.AddChatMessage;
+import net.minecraft.client.Minecraft;
 
 import java.io.IOException;
 import java.util.Objects;
 import java.util.Timer;
-
 import java.util.TimerTask;
 import java.util.concurrent.ThreadLocalRandom;
-
-import me.yanjobs.pitutils.PitUtils;
-import me.yanjobs.pitutils.utils.AddChatMessage;
-import net.minecraft.client.Minecraft;
 public class ChatEvent {
     public static double eval(final String str) {
         return new Object() {
@@ -127,7 +125,7 @@ public class ChatEvent {
     public String result (String message) {
         String expression = message.substring(message.indexOf(":")+2);
         expression = expression.replace("x", "*");
-        return "/ac" + (int) (eval(expression));
+        return "/ac " + (int) (eval(expression));
     }
 
     public static double minRange() throws IOException {
