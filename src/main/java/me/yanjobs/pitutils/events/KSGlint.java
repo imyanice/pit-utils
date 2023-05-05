@@ -12,16 +12,16 @@ import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.scoreboard.ScorePlayerTeam;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.EnumChatFormatting;
 import org.lwjgl.util.Color;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
+
+import static me.yanjobs.pitutils.utils.Utils.getOnlinePlayersByName;
+import static me.yanjobs.pitutils.utils.Utils.getPlayerName;
 
 public class KSGlint {
     public static void renderFilledHitbox(final Entity entityIn, final Color color, final boolean translucent, final double partialTicks) {
@@ -79,22 +79,6 @@ public class KSGlint {
         GlStateManager.popAttrib();
         GlStateManager.popMatrix();
     }
-    public static List<String> getOnlinePlayersByName() {
-        final ArrayList<String> players = new ArrayList<>();
-        final Collection<NetworkPlayerInfo> playerCollection = Minecraft.getMinecraft().getNetHandler().getPlayerInfoMap();
-        for (final NetworkPlayerInfo networkPlayerInfo : playerCollection) {
-            final String playerName = networkPlayerInfo.getGameProfile().getName();
-            if (playerName != null) {
-                players.add(playerName);
-            }
-        }
-        return players;
-    }
-    public static String getPlayerName(final NetworkPlayerInfo networkPlayerInfoIn) {
-        return (networkPlayerInfoIn.getDisplayName() != null) ? networkPlayerInfoIn.getDisplayName().getFormattedText() : ScorePlayerTeam.formatPlayerName(networkPlayerInfoIn.getPlayerTeam(), networkPlayerInfoIn.getGameProfile().getName());
-    }
-
-
     @SubscribeEvent
     public void renderPlayers(final RenderWorldEvent event) throws IOException {
         if (Objects.equals(PitUtils.getConfig().getProperty("target.enabled"), "true")) {
