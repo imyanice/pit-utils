@@ -1,6 +1,6 @@
 package me.yanjobs.pitutils.commands;
 
-import club.maxstats.weave.loader.api.command.Command;
+import net.weavemc.loader.api.command.Command;
 
 import me.yanjobs.pitutils.utils.AddChatMessage;
 import me.yanjobs.pitutils.PitUtils;

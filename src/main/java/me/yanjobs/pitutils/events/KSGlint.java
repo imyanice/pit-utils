@@ -1,7 +1,7 @@
 package me.yanjobs.pitutils.events;
 
-import club.maxstats.weave.loader.api.event.RenderWorldEvent;
-import club.maxstats.weave.loader.api.event.SubscribeEvent;
+import net.weavemc.loader.api.event.RenderWorldEvent;
+import net.weavemc.loader.api.event.SubscribeEvent;
 import me.yanjobs.pitutils.PitUtils;
 import me.yanjobs.pitutils.utils.AddChatMessage;
 import net.minecraft.client.Minecraft;

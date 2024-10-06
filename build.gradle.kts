@@ -14,11 +14,13 @@ repositories {
 }
 
 dependencies {
-    compileOnly("com.github.weave-mc:weave-loader:v0.1.0")
+    compileOnly("com.github.weave-mc:weave-loader:v0.2.4")
+
 
     compileOnly("org.spongepowered:mixin:0.8.5")
 }
 
-//tasks.compileJava {
-//    options.release.set(11)
-//}
+
+tasks.compileJava {
+    options.release.set(17)
+}
