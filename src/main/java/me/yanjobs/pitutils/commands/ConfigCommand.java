@@ -1,8 +1,9 @@
 package me.yanjobs.pitutils.commands;
 
-import net.weavemc.loader.api.command.Command;
+// import net.weavemc.loader.api.command.Command;
 
 import me.yanjobs.pitutils.utils.AddChatMessage;
+import net.weavemc.api.command.Command;
 import me.yanjobs.pitutils.PitUtils;
 
 import java.util.regex.Matcher;
@@ -28,37 +29,39 @@ public class ConfigCommand extends Command {
     public ConfigCommand() {
         super("pitconfig", "pconfig", "pconf", "pitc");
     }
-    public void handle(String[] args) {
+
+    public void execute(String[] args) {
+        AddChatMessage.addInfoMessage("Made by Yanice, discord.gg/lilith");
         if (args.length != 2) {
             AddChatMessage.addErrorMessage("Usage: /pitconfig <option> <value>");
         } else {
             // Quick Maths section
-            if (Objects.equals(args[0], "quickmaths.enabled")) {
-                if (args[1].equalsIgnoreCase("true") || args[1].equalsIgnoreCase("false")) {
-                    PitUtils.getConfig().setProperty("quickmaths.enabled", args[1].toLowerCase());
-                    AddChatMessage.addInfoMessage("Successfully set quickmaths.enabled to " + args[1].toLowerCase());
+            if (Objects.equals(args[1], "quickmaths.enabled")) {
+                if (args[2].equalsIgnoreCase("true") || args[2].equalsIgnoreCase("false")) {
+                    PitUtils.getConfig().setProperty("quickmaths.enabled", args[2].toLowerCase());
+                    AddChatMessage.addInfoMessage("Successfully set quickmaths.enabled to " + args[2].toLowerCase());
                 } else {
                     AddChatMessage.addErrorMessage("The value must be either 'true' or 'false'");
                 }
-            } else if (Objects.equals(args[0], "quickmaths.range")) {
-                if (isQuickMathsRange(args[1])) {
-                    PitUtils.getConfig().setProperty("quickmaths.range", args[1]);
-                    AddChatMessage.addInfoMessage("Successfully set quickmaths.range to " + args[1].toLowerCase());
+            } else if (Objects.equals(args[1], "quickmaths.range")) {
+                if (isQuickMathsRange(args[2])) {
+                    PitUtils.getConfig().setProperty("quickmaths.range", args[2]);
+                    AddChatMessage.addInfoMessage("Successfully set quickmaths.range to " + args[2].toLowerCase());
                 } else {
-                    AddChatMessage.addErrorMessage("The value must be: 'int1,int2' and int2 <= 3000, int1 <= 3000. e.g. 3000,3000");
+                    AddChatMessage.addErrorMessage(
+                            "The value must be: 'int1,int2' and int2 <= 3000, int1 <= 3000. e.g. 3000,3000");
                 }
-            } else if (Objects.equals(args[0], "verbose")) {
-                if (args[1].equalsIgnoreCase("true") || args[1].equalsIgnoreCase("false")) {
-                    PitUtils.getConfig().setProperty("verbose", args[1].toLowerCase());
-                    AddChatMessage.addInfoMessage("Successfully set verbose to " + args[1].toLowerCase());
+            } else if (Objects.equals(args[1], "verbose")) {
+                if (args[2].equalsIgnoreCase("true") || args[2].equalsIgnoreCase("false")) {
+                    PitUtils.getConfig().setProperty("verbose", args[2].toLowerCase());
+                    AddChatMessage.addInfoMessage("Successfully set verbose to " + args[2].toLowerCase());
                 } else {
                     AddChatMessage.addErrorMessage("The value must be either 'true' or 'false'");
                 }
-            }
-            else if (Objects.equals(args[0], "glint.enabled")) {
-                if (args[1].equalsIgnoreCase("true") || args[1].equalsIgnoreCase("false")) {
-                    PitUtils.getConfig().setProperty("glint.enabled", args[1].toLowerCase());
-                    AddChatMessage.addInfoMessage("Successfully set glint.enabled to " + args[1].toLowerCase());
+            } else if (Objects.equals(args[1], "glint.enabled")) {
+                if (args[2].equalsIgnoreCase("true") || args[2].equalsIgnoreCase("false")) {
+                    PitUtils.getConfig().setProperty("glint.enabled", args[2].toLowerCase());
+                    AddChatMessage.addInfoMessage("Successfully set glint.enabled to " + args[2].toLowerCase());
                 } else {
                     AddChatMessage.addErrorMessage("The value must be either 'true' or 'false'");
                 }

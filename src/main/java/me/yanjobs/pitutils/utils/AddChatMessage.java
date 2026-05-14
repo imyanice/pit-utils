@@ -11,18 +11,29 @@ import java.util.Objects;
 
 public class AddChatMessage {
 
-    public static void addInfoMessage(@NotNull   String message) {
-        ChatComponentText infoLevel = new ChatComponentText(EnumChatFormatting.BLACK + "[" + EnumChatFormatting.DARK_BLUE + "PIT UTILS" + EnumChatFormatting.BLACK + "]" + EnumChatFormatting.WHITE + " - ");
-        Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(infoLevel.text + message));
+    public static void addInfoMessage(@NotNull String message) {
+        ChatComponentText infoLevel = new ChatComponentText(
+                EnumChatFormatting.BLACK + "[" + EnumChatFormatting.DARK_BLUE + "PIT UTILS" + EnumChatFormatting.BLACK
+                        + "]" + EnumChatFormatting.WHITE + " - ");
+        Minecraft.getMinecraft().thePlayer
+                .addChatMessage(new ChatComponentText(infoLevel.getFormattedText() + message));
     }
+
     public static void addErrorMessage(@NotNull String message) {
-        ChatComponentText errorLevel = new ChatComponentText(EnumChatFormatting.BLACK + "[" + EnumChatFormatting.DARK_BLUE + "PIT UTILS" + EnumChatFormatting.BLACK + "]" + EnumChatFormatting.RED + " - ");
-        Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(errorLevel.text + message));
+        ChatComponentText errorLevel = new ChatComponentText(
+                EnumChatFormatting.BLACK + "[" + EnumChatFormatting.DARK_BLUE + "PIT UTILS" + EnumChatFormatting.BLACK
+                        + "]" + EnumChatFormatting.RED + " - ");
+        Minecraft.getMinecraft().thePlayer
+                .addChatMessage(new ChatComponentText(errorLevel.getFormattedText() + message));
     }
+
     public static void addVerboseMessage(@NotNull String message) throws IOException {
         if (Objects.equals(PitUtils.getConfig().getProperty("verbose"), "true")) {
-            ChatComponentText verboseLevel = new ChatComponentText(EnumChatFormatting.BLACK + "[" + EnumChatFormatting.DARK_BLUE + "PIT UTILS" + EnumChatFormatting.BLACK + "]" + EnumChatFormatting.DARK_GRAY + " - ");
-            Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(verboseLevel.text + message));
+            ChatComponentText verboseLevel = new ChatComponentText(
+                    EnumChatFormatting.BLACK + "[" + EnumChatFormatting.DARK_BLUE + "PIT UTILS"
+                            + EnumChatFormatting.BLACK + "]" + EnumChatFormatting.DARK_GRAY + " - ");
+            Minecraft.getMinecraft().thePlayer
+                    .addChatMessage(new ChatComponentText(verboseLevel.getFormattedText() + message));
         }
     }
 }
