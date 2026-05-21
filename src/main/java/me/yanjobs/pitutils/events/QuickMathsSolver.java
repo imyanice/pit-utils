@@ -2,19 +2,18 @@ package me.yanjobs.pitutils.events;
 
 // import net.weavemc.loader.api.event.ChatReceivedEvent;
 // import net.weavemc.loader.api.event.SubscribeEvent;
-import me.yanjobs.pitutils.PitUtils;
-import me.yanjobs.pitutils.utils.AddChatMessage;
-import net.minecraft.client.Minecraft;
-import net.weavemc.api.ChatReceivedEvent;
-import net.weavemc.api.event.SubscribeEvent;
-
 import java.io.IOException;
-import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class ChatEvent {
+import me.yanjobs.pitutils.PitUtils;
+import me.yanjobs.pitutils.utils.AddChatMessage;
+import net.minecraft.client.Minecraft;
+import net.weavemc.api.event.ChatEvent;
+import net.weavemc.api.event.SubscribeEvent;
+
+public class QuickMathsSolver {
     public static double eval(final String str) {
         return new Object() {
             int pos = -1, ch;
@@ -146,27 +145,31 @@ public class ChatEvent {
      * @return the equation's result parsed from the message param
      */
     public String result(String message) {
+        System.out.println(message);
         String expression = message.substring(message.indexOf(":") + 2);
         expression = expression.replace("x", "*");
         return "/ac " + (int) (eval(expression));
     }
 
     public static double minRange() throws IOException {
-        String[] range = PitUtils.getConfig().getProperties().getProperty("quickmaths.range").split(",");
+        String[] range = PitUtils.getConfig().getProperties().getProperty("quickmaths.delayRange").split(",");
         return Integer.parseInt(range[0]);
     };
 
     public static double maxRange() throws IOException {
-        String[] range = PitUtils.getConfig().getProperties().getProperty("quickmaths.range").split(",");
+        String[] range = PitUtils.getConfig().getProperties().getProperty("quickmaths.delayRange").split(",");
         return Integer.parseInt(range[1]);
     };
 
     @SubscribeEvent
-    public void onChatReceived(ChatReceivedEvent event) throws IOException {
-        if (Objects.equals(PitUtils.getConfig().getProperties().getProperty("quickmaths.enabled"), "true")) {
+    public void onChatReceived(ChatEvent.Received event) throws IOException {
+        if ("true".equals(PitUtils.getConfig().getProperties().getProperty("quickmaths.enabled"))) {
             String quickMathMessage = event.getMessage().getUnformattedText();
 
             if (quickMathMessage.contains("QUICK MATHS! Solve: ")) {
+                System.out.println(
+                    "hello"
+                );
                 String result = result(quickMathMessage);
 
                 // Creating a new task

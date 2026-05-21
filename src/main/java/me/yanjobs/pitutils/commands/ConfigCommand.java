@@ -2,14 +2,13 @@ package me.yanjobs.pitutils.commands;
 
 // import net.weavemc.loader.api.command.Command;
 
-import me.yanjobs.pitutils.utils.AddChatMessage;
-import net.weavemc.api.command.Command;
-import me.yanjobs.pitutils.PitUtils;
-
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import java.util.Objects;
+import me.yanjobs.pitutils.PitUtils;
+import me.yanjobs.pitutils.utils.AddChatMessage;
+import net.weavemc.api.command.Command;
 
 public class ConfigCommand extends Command {
 
@@ -30,9 +29,10 @@ public class ConfigCommand extends Command {
         super("pitconfig", "pconfig", "pconf", "pitc");
     }
 
+    @Override
     public void execute(String[] args) {
         AddChatMessage.addInfoMessage("Made by Yanice, discord.gg/lilith");
-        if (args.length != 2) {
+        if (args.length != 3) {
             AddChatMessage.addErrorMessage("Usage: /pitconfig <option> <value>");
         } else {
             // Quick Maths section
@@ -43,10 +43,10 @@ public class ConfigCommand extends Command {
                 } else {
                     AddChatMessage.addErrorMessage("The value must be either 'true' or 'false'");
                 }
-            } else if (Objects.equals(args[1], "quickmaths.range")) {
+            } else if (Objects.equals(args[1], "quickmaths.delayRange")) {
                 if (isQuickMathsRange(args[2])) {
-                    PitUtils.getConfig().setProperty("quickmaths.range", args[2]);
-                    AddChatMessage.addInfoMessage("Successfully set quickmaths.range to " + args[2].toLowerCase());
+                    PitUtils.getConfig().setProperty("quickmaths.delayRange", args[2]);
+                    AddChatMessage.addInfoMessage("Successfully set quickmaths.delayRange to " + args[2].toLowerCase());
                 } else {
                     AddChatMessage.addErrorMessage(
                             "The value must be: 'int1,int2' and int2 <= 3000, int1 <= 3000. e.g. 3000,3000");
