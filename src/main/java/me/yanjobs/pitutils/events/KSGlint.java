@@ -2,8 +2,16 @@ package me.yanjobs.pitutils.events;
 
 // import net.weavemc.loader.api.event.RenderWorldEvent;
 // import net.weavemc.loader.api.event.SubscribeEvent;
+import java.io.IOException;
+import java.util.List;
+import java.util.Objects;
+
+import org.lwjgl.util.Color;
+
 import me.yanjobs.pitutils.PitUtils;
 import me.yanjobs.pitutils.utils.AddChatMessage;
+import static me.yanjobs.pitutils.utils.Utils.getOnlinePlayersByName;
+import static me.yanjobs.pitutils.utils.Utils.getPlayerName;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.network.NetworkPlayerInfo;
 import net.minecraft.client.renderer.GlStateManager;
@@ -14,22 +22,12 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.EnumChatFormatting;
-import net.weavemc.api.RenderWorldEvent;
+import net.weavemc.api.event.RenderWorldEvent;
 import net.weavemc.api.event.SubscribeEvent;
-
-import org.lwjgl.util.Color;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.Objects;
-
-import static me.yanjobs.pitutils.utils.Utils.getOnlinePlayersByName;
-import static me.yanjobs.pitutils.utils.Utils.getPlayerName;
 
 public class KSGlint {
     public static void renderFilledHitbox(final Entity entityIn, final Color color, final boolean translucent,
             final double partialTicks) {
-        final Entity render = Minecraft.getMinecraft().getRenderViewEntity();
         final WorldRenderer worldRenderer = Tessellator.getInstance().getWorldRenderer();
         if (entityIn.ticksExisted == 0) {
             entityIn.lastTickPosX = entityIn.posX;

@@ -5,7 +5,7 @@ package me.yanjobs.pitutils;
 // import net.weavemc.loader.api.event.EventBus;
 import me.yanjobs.pitutils.commands.ConfigCommand;
 import me.yanjobs.pitutils.commands.TargetPlayerCommand;
-import me.yanjobs.pitutils.events.ChatEvent;
+import me.yanjobs.pitutils.events.QuickMathsSolver;
 import me.yanjobs.pitutils.events.KSGlint;
 import me.yanjobs.pitutils.utils.Config;
 import net.weavemc.api.ModInitializer;
@@ -20,7 +20,7 @@ public class PitUtils implements ModInitializer {
     @Override
     public void init() {
         System.out.println("Registered PitUtils!");
-        EventBus.subscribe(new ChatEvent());
+        EventBus.subscribe(new QuickMathsSolver());
         CommandBus.register(new ConfigCommand());
         CommandBus.register(new TargetPlayerCommand());
         EventBus.subscribe(new KSGlint());
